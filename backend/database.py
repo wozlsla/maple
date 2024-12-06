@@ -15,3 +15,11 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()  # db session 객체 생성
+    try:
+        yield db
+    finally:
+        db.close()  # session 반환 (컨넥션 풀에 반환 / 종료 X)
