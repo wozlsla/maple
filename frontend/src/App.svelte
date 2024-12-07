@@ -1,11 +1,19 @@
 <script>
-  let message;
+  let posts_list = []; // init
 
-  fetch("http://127.0.0.1:8000").then((response) => {
-    response.json().then((json) => {
-      message = json.message;
+  function get_posts() {
+    fetch("http://127.0.0.1:8000/api/board/list").then((response) => {
+      response.json().then((json) => {
+        posts_list = json;
+      });
     });
-  });
+  }
+
+  get_posts();
 </script>
 
-<h1>{message}</h1>
+<ul>
+  {#each posts_list as post}
+    <li>{post.title}</li>
+  {/each}
+</ul>
