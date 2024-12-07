@@ -13,6 +13,6 @@ router = APIRouter(
 
 
 @router.get("/list", response_model=list[schemas.Post])
-def get_post_list(db: Session = Depends(get_db)):
-    _posts = board_service.get_post_list(db)
+def get_posts(db: Session = Depends(get_db)):
+    _posts = board_service.get_posts(db)
     return _posts
