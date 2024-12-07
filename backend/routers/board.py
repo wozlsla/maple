@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from backend.database import get_db
 from backend import schemas
-from backend.models import Post
+from backend.services import board_service
 
 
 # router 객체 등록
@@ -14,5 +14,5 @@ router = APIRouter(
 
 @router.get("/list", response_model=list[schemas.Post])
 def get_post_list(db: Session = Depends(get_db)):
-    _posts = db.query(Post).order_by(Post.created_at.desc()).all()  # 질문 목록 조회
+    _posts = board_service.get_post_list(db)
     return _posts
