@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
+from backend import schemas
 from backend.models import Post
 
 
@@ -11,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/list")
+@router.get("/list", response_model=list[schemas.Post])
 def get_post_list(db: Session = Depends(get_db)):
     _posts = db.query(Post).order_by(Post.created_at.desc()).all()  # 질문 목록 조회
     return _posts
