@@ -1,19 +1,15 @@
 <script>
-  let posts_list = []; // init
+  import Router from "svelte-spa-router";
+  import Home from "./pages/Home.svelte";
 
-  function get_posts() {
-    fetch("http://127.0.0.1:8000/api/board/list").then((response) => {
-      response.json().then((json) => {
-        posts_list = json;
-      });
-    });
-  }
+  // svelte-spa-router에서는 반드시 routes라는 이름을 사용해야 함
+  const routes = {
+    "/": Home,
+  };
 
-  get_posts();
+  // console.log("라우트 설정:", routes); // 라우트 설정 확인
+  // console.log("Home 컴포넌트:", Home); // Home 컴포넌트 임포트 확인
 </script>
 
-<ul>
-  {#each posts_list as post}
-    <li>{post.title}</li>
-  {/each}
-</ul>
+<p>현재 페이지</p>
+<Router {routes} />

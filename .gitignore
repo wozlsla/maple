@@ -8,3 +8,5 @@ env/
 # alembic
 migrations/*
 !migrations/env.py
+
+node_modules
