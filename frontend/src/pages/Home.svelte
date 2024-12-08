@@ -1,11 +1,10 @@
 <script>
+  import fastapi from '../lib/api';
   let posts_list = []; // init
 
   function get_posts() {
-    fetch('http://127.0.0.1:8000/api/board/list').then((response) => {
-      response.json().then((json) => {
-        posts_list = json;
-      });
+    fastapi('get', '/api/board/list', {}, (json) => {
+      posts_list = json;
     });
   }
 
