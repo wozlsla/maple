@@ -1,5 +1,7 @@
 <script>
   import fastapi from '../lib/api';
+  import { link } from 'svelte-spa-router';
+
   let posts_list = []; // init
 
   function get_posts() {
@@ -13,6 +15,7 @@
 
 <ul>
   {#each posts_list as post}
-    <li>{post.title}</li>
+    <!-- use:link ~/#/detail -->
+    <li><a use:link href="/detail/{post.id}">{post.title}</a></li>
   {/each}
 </ul>

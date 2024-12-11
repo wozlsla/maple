@@ -16,3 +16,9 @@ router = APIRouter(
 def get_posts(db: Session = Depends(get_db)):
     _posts = board_service.get_posts(db)
     return _posts
+
+
+@router.get("/detail/{post_id}", response_model=schemas.Post)
+def post_detail(post_id: int, db: Session = Depends(get_db)):
+    post = board_service.get_post(db, post_id=post_id)
+    return post
