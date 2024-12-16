@@ -5,7 +5,7 @@
   let posts_list = []; // init
 
   function get_posts() {
-    fastapi('get', '/api/board/list', {}, (json) => {
+    fastapi('get', '/api/v1/board/list', {}, (json) => {
       posts_list = json;
     });
   }
@@ -34,4 +34,5 @@
       {/each}
     </tbody>
   </table>
+  <a use:link href="/board" class="btn btn-primary">글쓰기</a>
 </div>

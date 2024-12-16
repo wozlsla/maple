@@ -9,7 +9,7 @@
   let error = { detail: [] };
 
   function get_post() {
-    fastapi('get', '/api/board/detail/' + post_id, {}, (json) => {
+    fastapi('get', '/api/v1/board/detail/' + post_id, {}, (json) => {
       post = json;
     });
   }
@@ -18,7 +18,7 @@
 
   function post_comment(event) {
     event.preventDefault();
-    let url = '/api/board/detail/' + post_id + '/comment';
+    let url = '/api/v1/board/detail/' + post_id + '/comment';
     let params = {
       content: content,
     };
@@ -31,8 +31,8 @@
         error = { detail: [] };
         get_post();
       },
-      (err_json) => {
-        error = err_json;
+      (json_error) => {
+        error = json_error;
       }
     );
   }

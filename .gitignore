@@ -9,4 +9,8 @@ env/
 migrations/*
 !migrations/env.py
 
+# npm
 node_modules
+
+# Editor directories and files
+.vscode/*
