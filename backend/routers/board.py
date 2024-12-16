@@ -9,7 +9,7 @@ from backend.services import board_service
 
 # router 객체 등록
 router = APIRouter(
-    prefix="/api/board",
+    prefix="/api/v1/board",
 )
 
 
@@ -31,7 +31,6 @@ def add_comment(
     _add_comment: board_schema.CommentCreate,
     db: Session = Depends(get_db),
 ):
-
     post = board_service.get_post(db, post_id=post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -40,3 +39,11 @@ def add_comment(
         post=post,
         add_comment=_add_comment,
     )
+
+
+@router.post("/post", status_code=status.HTTP_204_NO_CONTENT)
+def add_post(
+    _post_create: board_schema.PostCreate,
+    db: Session = Depends(get_db),
+):
+    board_service.create_post(db=db, post_create=_post_create)

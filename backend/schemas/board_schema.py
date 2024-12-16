@@ -19,6 +19,17 @@ class Comment(BaseModel):
     created_at: datetime.datetime
 
 
+class PostCreate(BaseModel):
+    title: str
+    content: str
+
+    @field_validator("title", "content")
+    def not_empty(cls, v):
+        if not v or not v.strip():
+            raise ValueError("빈 값은 허용되지 않습니다.")
+        return v
+
+
 class Post(BaseModel):
     id: int
     title: str
