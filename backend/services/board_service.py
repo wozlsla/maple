@@ -1,5 +1,8 @@
-from backend.models import Post
+from datetime import datetime
 from sqlalchemy.orm import Session
+
+from backend.models import Post, Comment
+from backend.schemas.board_schema import CommentCreate
 
 
 def get_posts(db: Session):
@@ -10,3 +13,13 @@ def get_posts(db: Session):
 def get_post(db: Session, post_id: int):
     post = db.query(Post).get(post_id)
     return post
+
+
+def create_comment(db: Session, post: Post, add_comment: CommentCreate):
+    db_comment = Comment(
+        post=post,
+        content=add_comment.content,
+        created_at=datetime.now(),
+    )
+    db.add(db_comment)
+    db.commit()
