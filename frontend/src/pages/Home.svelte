@@ -13,9 +13,25 @@
   get_posts();
 </script>
 
-<ul>
-  {#each posts_list as post}
-    <!-- use:link ~/#/detail -->
-    <li><a use:link href="/detail/{post.id}">{post.title}</a></li>
-  {/each}
-</ul>
+<div class="container my-3">
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일시</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each posts_list as post, i}
+        <tr>
+          <td>{i + 1}</td>
+          <td>
+            <a use:link href="/detail/{post.id}">{post.title}</a>
+          </td>
+          <td>{post.created_at}</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+</div>
