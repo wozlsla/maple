@@ -36,3 +36,8 @@ class Post(BaseModel):
     content: str
     created_at: datetime.datetime
     comment: list[Comment] = []
+
+
+class PostList(BaseModel):
+    total: int = 0
+    post_list: list[Post] = []

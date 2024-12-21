@@ -5,9 +5,11 @@ from backend.models import Post, Comment
 from backend.schemas.board_schema import CommentCreate, PostCreate
 
 
-def get_posts(db: Session):
-    posts = db.query(Post).order_by(Post.created_at.desc()).all()
-    return posts
+def get_posts(db: Session, skip: int = 0, limit: int = 15):
+    _post_list = db.query(Post).order_by(Post.created_at.desc())
+    total = _post_list.count()
+    post_list = _post_list.offset(skip).limit(limit).all()
+    return total, post_list
 
 
 def get_post(db: Session, post_id: int):
