@@ -3,6 +3,7 @@
   import Home from './pages/Home.svelte';
   import Detail from './pages/PostDetail.svelte';
   import Board from './pages/Board.svelte';
+  import Navigation from './components/Navigation.svelte';
 
   // svelte-spa-router에서는 반드시 routes라는 이름을 사용해야 함
   const routes = {
@@ -15,4 +16,5 @@
   // console.log("Home 컴포넌트:", Home); // Home 컴포넌트 임포트 확인
 </script>
 
+<Navigation />
 <Router {routes} />
